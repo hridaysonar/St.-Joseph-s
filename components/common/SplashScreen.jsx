@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import BrandLogo from "./BrandLogo.jsx";
 export const SplashScreen = ({ onFinish }) => {
   const [fade, setFade] = useState(false);
   useEffect(() => {
@@ -23,13 +24,7 @@ export const SplashScreen = ({ onFinish }) => {
       {/* Center Branding */}
       <div className="flex flex-col items-center justify-center text-center space-y-4 animate-in fade-in zoom-in-95 duration-500">
         <div className="relative">
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-400 p-0.5 shadow-2xl shadow-indigo-500/30 flex items-center justify-center">
-            <div className="w-full h-full bg-slate-950 rounded-[22px] flex items-center justify-center">
-              <span className="text-3xl font-black bg-gradient-to-br from-white via-indigo-100 to-indigo-400 bg-clip-text text-transparent">
-                SL
-              </span>
-            </div>
-          </div>
+          <BrandLogo size={112} priority />
           <div className="absolute -inset-1 rounded-3xl bg-indigo-500/20 blur-xl -z-10 animate-pulse"></div>
         </div>
 

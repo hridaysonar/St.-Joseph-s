@@ -1,7 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Student Life",
+  title: { default: "Student Life | Plan, Study & Excel", template: "%s | Student Life" },
+  icons: { icon: "/img/website%20logo.jpeg", apple: "/img/website%20logo.jpeg" },
   description:
     "Personal student management system — plan, study, track syllabus, daily tasks, namaz, routine, exams, and ask Student AI.",
   openGraph: { title: "Student Life", type: "website" },

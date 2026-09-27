@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import BrandLogo from "./BrandLogo.jsx";
 import {
   Home,
   CheckSquare,
@@ -45,14 +46,14 @@ export const Navigation = ({
       <header className="sticky top-0 z-40 w-full bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           {/* Brand Logo & Name (No "by Nahid" here per specification rule) */}
-          <div
+          <button
+            type="button"
+            aria-label="Student Life home"
             onClick={() => onChangeTab("home")}
-            className="flex items-center gap-2.5 cursor-pointer select-none"
+            className="flex shrink-0 items-center gap-2.5 cursor-pointer select-none text-left"
           >
-            <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 flex items-center justify-center text-white font-black text-sm shadow-md shadow-indigo-600/20">
-              SL
-            </div>
-            <div>
+            <BrandLogo size={44} priority />
+            <div className="hidden min-[480px]:block">
               <div className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight leading-none">
                 Student Life
               </div>
@@ -60,7 +61,7 @@ export const Navigation = ({
                 Personal Student System
               </span>
             </div>
-          </div>
+          </button>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl border border-slate-200/60 dark:border-slate-800">
@@ -84,7 +85,7 @@ export const Navigation = ({
           </nav>
 
           {/* Action Icons: Timer, Analytics, Notes, Exams, Dark Mode, Notification */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center sm:gap-2">
             <button
               onClick={onOpenTimer}
               className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"

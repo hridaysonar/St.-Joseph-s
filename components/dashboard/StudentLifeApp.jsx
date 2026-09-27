@@ -1,4 +1,6 @@
 "use client";
+import TeamSection from "../common/TeamSection.jsx";
+import SiteFooter from "../common/SiteFooter.jsx";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -299,7 +301,9 @@ export default function App() {
             subjects={subjects}
           />
         )}
+        {currentTab === "home" && <TeamSection />}
       </main>
+      <SiteFooter />
 
       {/* Floating Mini AI Assistant Modal */}
       <StudentAIModal
