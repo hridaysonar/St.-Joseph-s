@@ -120,7 +120,7 @@ export const NotesAndGoalsView = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl self-start sm:self-auto">
+        <div className="flex max-w-full flex-wrap items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl self-start sm:self-auto">
           <button
             onClick={() => setTab("notes")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
@@ -172,8 +172,8 @@ export const NotesAndGoalsView = ({
 
           {/* Add Note Modal */}
           {isAddingNote && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-6 shadow-2xl space-y-4">
+            <div className="dialog-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
+              <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-6 shadow-2xl space-y-4">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
                   Create Quick Study Note
                 </h3>
@@ -309,8 +309,8 @@ export const NotesAndGoalsView = ({
 
           {/* Add Goal Modal */}
           {isAddingGoal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-6 shadow-2xl space-y-4">
+            <div className="dialog-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
+              <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-6 shadow-2xl space-y-4">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
                   Add Academic Goal
                 </h3>

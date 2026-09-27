@@ -11,10 +11,10 @@ export const NotificationCenter = ({
 }) => {
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-end p-4 bg-slate-950/40 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-sm mt-14 shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+    <div className="dialog-overlay fixed inset-0 z-50 flex items-start justify-end p-4 bg-slate-950/40 backdrop-blur-xs animate-in fade-in">
+      <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-sm sm:mt-14 shadow-2xl overflow-hidden flex flex-col max-h-[80dvh]">
         {/* Header */}
-        <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <Bell className="w-4 h-4 text-indigo-500" />
             <h3 className="font-bold text-sm text-slate-900 dark:text-white">
@@ -62,7 +62,7 @@ export const NotificationCenter = ({
                     : "bg-indigo-50/50 dark:bg-indigo-950/20 border-indigo-200/80 dark:border-indigo-900/50"
                 }`}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="font-bold text-slate-900 dark:text-white">
                     {n.title}
                   </span>

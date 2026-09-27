@@ -232,13 +232,13 @@ export const TaskManagement = ({
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Type filter */}
-          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl">
+          <div className="flex flex-wrap items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl">
             {["All", "Study Task", "Assignment/Homework", "Personal Task"].map(
               (t) => (
                 <button
                   key={t}
                   onClick={() => setFilterType(t)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
+                  className={`shrink-0 whitespace-nowrap px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                     filterType === t
                       ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 font-bold shadow-xs"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -272,8 +272,8 @@ export const TaskManagement = ({
 
       {/* New Task Modal / Drawer */}
       {isAdding && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg p-6 shadow-2xl space-y-4">
+        <div className="dialog-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
+          <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg p-6 shadow-2xl space-y-4">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white">
               Create New Task
             </h3>

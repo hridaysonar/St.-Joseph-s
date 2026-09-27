@@ -50,8 +50,8 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
   };
   const mailtoLink = `mailto:${adminEmail}?subject=${encodeURIComponent(currentSubject)}&body=${encodeURIComponent(`Student: ${profile.studentName}\nStudent ID: ${profile.studentId}\nClass: ${profile.grade}\nSchool: ${profile.school}\n\nMessage:\n${message || "[Your message here]"}`)}`;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg p-6 shadow-2xl space-y-5 relative">
+    <div className="dialog-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-in fade-in">
+      <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg p-6 shadow-2xl space-y-5 relative">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -76,7 +76,7 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
         </div>
 
         {/* Official Admin Email Notice */}
-        <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3 text-xs">
+        <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
               Official Admin Support Gmail
@@ -172,7 +172,7 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
               />
             </div>
 
-            <div className="flex items-center justify-between pt-2">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
               <span className="text-[11px] text-slate-400">
                 From: {profile.studentName} ({profile.studentId})
               </span>

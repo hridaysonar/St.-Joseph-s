@@ -127,8 +127,8 @@ export const StudentAIModal = ({
     }
   };
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-xl h-[86vh] max-h-[720px] flex flex-col shadow-2xl overflow-hidden relative">
+    <div className="dialog-overlay fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
+      <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-xl h-[86dvh] max-h-[720px] flex flex-col shadow-2xl overflow-hidden relative">
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-indigo-50/70 via-white to-purple-50/70 dark:from-indigo-950/30 dark:via-slate-900 dark:to-purple-950/30">
           <div className="flex items-center gap-3">
@@ -175,7 +175,7 @@ export const StudentAIModal = ({
               )}
 
               <div
-                className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed shadow-xs ${
+                className={`min-w-0 flex-1 max-w-[85%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed shadow-xs ${
                   m.role === "user"
                     ? "bg-indigo-600 text-white rounded-tr-xs"
                     : "bg-slate-50 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/60 rounded-tl-xs"

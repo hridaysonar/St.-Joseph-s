@@ -276,13 +276,13 @@ export const StudySection = ({
           </div>
 
           {!showRevisionOnly && (
-            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs">
+            <div className="flex flex-wrap items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs">
               {["All", "Not Started", "Learning", "Completed", "Revision"].map(
                 (st) => (
                   <button
                     key={st}
                     onClick={() => setFilterStatus(st)}
-                    className={`px-2.5 py-1 rounded-lg transition-all ${
+                    className={`shrink-0 whitespace-nowrap px-2.5 py-2 rounded-lg transition-all ${
                       filterStatus === st
                         ? "bg-white dark:bg-slate-900 font-bold text-indigo-600 dark:text-indigo-400 shadow-xs"
                         : "text-slate-600 dark:text-slate-400"

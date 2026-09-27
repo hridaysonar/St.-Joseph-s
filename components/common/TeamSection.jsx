@@ -1,7 +1,40 @@
 import Image from "next/image";
-import { Code2, Lightbulb } from "lucide-react";
+import { Code2, Lightbulb, Facebook, Phone } from "lucide-react";
 const creator = "/img/creator.jpeg";
 const developer = "/img/developer.jpg";
+
+const contacts = {
+  "Project Creator": {
+    href: "https://www.facebook.com/profile.php?id=61577225282274",
+    label: "Facebook Profile",
+    icon: Facebook,
+    external: true,
+  },
+  "Website Developer": {
+    href: "tel:+8801748662245",
+    label: "01748662245",
+    icon: Phone,
+    external: false,
+  },
+};
+
+function ContactLink({ title, name }) {
+  const contact = contacts[title];
+  const Icon = contact.icon;
+
+  return (
+    <a
+      href={contact.href}
+      target={contact.external ? "_blank" : undefined}
+      rel={contact.external ? "noopener noreferrer" : undefined}
+      aria-label={contact.external ? `${name} on Facebook (opens in a new tab)` : `Call ${name} at ${contact.label}`}
+      className="mt-5 inline-flex min-h-11 max-w-full items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:border-indigo-800 dark:bg-indigo-950/50 dark:text-indigo-300 dark:hover:bg-indigo-900/60"
+    >
+      <Icon aria-hidden="true" className="h-4 w-4" />
+      <span>{contact.label}</span>
+    </a>
+  );
+}
 
 const people = [
   { image: creator, name: "Nahid Hasan", title: "Project Creator", label: "Idea & Direction", description: "The idea and requirements behind Student Life — shaped around the everyday needs of a student.", icon: Lightbulb, accent: "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300" },
@@ -28,6 +61,7 @@ export default function TeamSection() {
               <span className={`inline-flex rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest ${accent}`}>{title}</span>
               <h3 className="mt-3 text-xl font-bold tracking-tight text-slate-900 dark:text-white">{name}</h3>
               <p className="mt-2 text-sm leading-7 text-slate-500 dark:text-slate-400">{description}</p>
+              <ContactLink title={title} name={name} />
             </div>
           </article>
         ))}

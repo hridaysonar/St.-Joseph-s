@@ -117,7 +117,7 @@ export const ClassRoutineView = ({
         </div>
 
         {/* View Switcher */}
-        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl border border-slate-200/80 dark:border-slate-800 self-start sm:self-auto">
+        <div className="flex flex-wrap items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl border border-slate-200/80 dark:border-slate-800 self-start sm:self-auto">
           <button
             onClick={() => setActiveTab("official")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
@@ -160,7 +160,7 @@ export const ClassRoutineView = ({
       {activeTab === "official" && (
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+            <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span>
                 Effective Date: <b>22.04.2026</b>
@@ -219,7 +219,7 @@ export const ClassRoutineView = ({
             </div>
 
             {/* Desktop Table View */}
-            <div className="overflow-x-auto">
+            <div className="max-w-full overflow-x-auto" tabIndex={0} role="region" aria-label="Weekly class routine">
               <table className="w-full text-center border-collapse text-xs">
                 <thead>
                   <tr className="bg-slate-900 text-white dark:bg-slate-950 font-bold border-b border-slate-700">

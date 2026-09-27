@@ -178,8 +178,8 @@ export const AuthModal = ({ isOpen, onClose, onSuccess, currentProfile }) => {
     }, 500);
   };
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg p-5 sm:p-7 shadow-2xl relative overflow-hidden max-h-[92vh] flex flex-col">
+    <div className="dialog-overlay fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in">
+      <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg p-5 sm:p-7 shadow-2xl relative overflow-hidden max-h-[92dvh] flex flex-col">
         {/* Close Button */}
         <button
           onClick={onClose}

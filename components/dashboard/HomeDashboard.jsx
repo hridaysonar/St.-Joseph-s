@@ -91,7 +91,7 @@ export const HomeDashboard = ({
       ? Math.round((completedChapters / totalChapters) * 100)
       : 0;
   return (
-    <div className="space-y-6 pb-24">
+    <div className="space-y-6">
       {/* 4. Home Hero Banner: Personalized greeting with Student's Name */}
       <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-950 text-white shadow-xl relative overflow-hidden">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -131,7 +131,7 @@ export const HomeDashboard = ({
           </div>
 
           {/* Quick Academic Profile Snapshot */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10 flex flex-col gap-2 min-w-[200px] text-xs">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10 flex flex-col gap-2 w-full md:w-56 md:shrink-0 text-xs">
             <span className="text-[10px] uppercase font-bold tracking-wider text-indigo-300">
               Active Enrollment
             </span>
@@ -156,7 +156,7 @@ export const HomeDashboard = ({
           onClick={onOpenTimer}
           className="p-4 rounded-3xl border border-indigo-200/80 dark:border-indigo-950/60 bg-white dark:bg-slate-900 shadow-xs hover:border-indigo-400 transition-all cursor-pointer group"
         >
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
             <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Study Time
             </span>
@@ -175,7 +175,7 @@ export const HomeDashboard = ({
           onClick={() => onNavigateTab("tasks")}
           className="p-4 rounded-3xl border border-emerald-200/80 dark:border-emerald-950/60 bg-white dark:bg-slate-900 shadow-xs hover:border-emerald-400 transition-all cursor-pointer group"
         >
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
             <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Namaz
             </span>
@@ -194,7 +194,7 @@ export const HomeDashboard = ({
           onClick={() => onNavigateTab("tasks")}
           className="p-4 rounded-3xl border border-purple-200/80 dark:border-purple-950/60 bg-white dark:bg-slate-900 shadow-xs hover:border-purple-400 transition-all cursor-pointer group"
         >
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
             <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Today Tasks
             </span>
@@ -213,7 +213,7 @@ export const HomeDashboard = ({
           onClick={() => onNavigateTab("study")}
           className="p-4 rounded-3xl border border-amber-200/80 dark:border-amber-950/60 bg-white dark:bg-slate-900 shadow-xs hover:border-amber-400 transition-all cursor-pointer group"
         >
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
             <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Syllabus
             </span>
@@ -234,7 +234,7 @@ export const HomeDashboard = ({
         <div className="lg:col-span-2 space-y-6">
           {/* Namaz Quick Interactive Row */}
           <div className="p-5 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <Moon className="w-4 h-4 text-emerald-500" />
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">
@@ -244,7 +244,7 @@ export const HomeDashboard = ({
               <span className="text-xs text-slate-400">Tap to mark prayed</span>
             </div>
 
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-3 min-[400px]:grid-cols-5 gap-2">
               {["Fajr", "Zuhr", "Asr", "Maghrib", "Isha"].map((prayer) => {
                 const done = dailyNamaz.prayers[prayer];
                 return (
@@ -271,7 +271,7 @@ export const HomeDashboard = ({
 
           {/* Today's Tasks Quick List */}
           <div className="p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-4">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                 <h3 className="font-bold text-base text-slate-900 dark:text-white">
@@ -292,7 +292,7 @@ export const HomeDashboard = ({
               {tasks.slice(0, 4).map((task) => (
                 <div
                   key={task.id}
-                  className={`p-3 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
+                  className={`p-3 rounded-2xl border transition-all flex flex-wrap items-center justify-between gap-2 gap-3 ${
                     task.completed
                       ? "bg-slate-50/60 dark:bg-slate-900/30 border-slate-200 dark:border-slate-800 opacity-60"
                       : "bg-white dark:bg-slate-800/60 border-slate-200/90 dark:border-slate-800"
@@ -335,7 +335,7 @@ export const HomeDashboard = ({
         <div className="space-y-6">
           {/* Next Class Widget */}
           <div className="p-5 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
                 Institutional Routine
               </span>
@@ -350,7 +350,7 @@ export const HomeDashboard = ({
 
             {nextClass ? (
               <div className="p-3.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 space-y-2">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
                     <span className="text-xs font-black text-indigo-700 dark:text-indigo-300">
                       Period {nextClass.periodNumber}: {nextClass.subject}
@@ -391,7 +391,7 @@ export const HomeDashboard = ({
 
           {/* Upcoming Exam Countdown Widget */}
           <div className="p-5 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-purple-600" />
                 <h4 className="font-bold text-sm text-slate-900 dark:text-white">

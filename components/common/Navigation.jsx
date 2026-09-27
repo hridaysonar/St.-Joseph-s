@@ -44,7 +44,7 @@ export const Navigation = ({
     <>
       {/* Top Header Navbar */}
       <header className="sticky top-0 z-40 w-full bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-0 sm:min-h-16 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           {/* Brand Logo & Name (No "by Nahid" here per specification rule) */}
           <button
             type="button"
@@ -53,7 +53,7 @@ export const Navigation = ({
             className="flex shrink-0 items-center gap-2.5 cursor-pointer select-none text-left"
           >
             <BrandLogo size={44} priority />
-            <div className="hidden min-[480px]:block">
+            <div>
               <div className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight leading-none">
                 Student Life
               </div>
@@ -64,7 +64,7 @@ export const Navigation = ({
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl border border-slate-200/60 dark:border-slate-800">
+          <nav aria-label="Main navigation" className="hidden xl:flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl border border-slate-200/60 dark:border-slate-800">
             {navItems.map((item) => {
               const active = currentTab === item.id;
               return (
@@ -85,7 +85,7 @@ export const Navigation = ({
           </nav>
 
           {/* Action Icons: Timer, Analytics, Notes, Exams, Dark Mode, Notification */}
-          <div className="flex items-center sm:gap-2">
+          <div className="flex w-full sm:w-auto items-center justify-between gap-1 [&>button]:min-h-11 [&>button]:min-w-9 [&>button]:justify-center sm:[&>button]:min-h-10">
             <button
               onClick={onOpenTimer}
               className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -183,7 +183,7 @@ export const Navigation = ({
       {/* Floating Ask Student AI Button (Spec requirement #4, #9, #20) */}
       <button
         onClick={onOpenAI}
-        className="fixed bottom-20 md:bottom-8 right-5 z-40 flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white font-bold text-xs sm:text-sm shadow-xl shadow-indigo-600/30 hover:scale-105 active:scale-95 transition-all group"
+        className="assistant-launcher fixed z-40 flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white font-bold text-xs sm:text-sm shadow-xl shadow-indigo-600/30 hover:scale-105 active:scale-95 transition-all group"
       >
         <div className="relative">
           <Sparkles
@@ -196,17 +196,17 @@ export const Navigation = ({
       </button>
 
       {/* Mobile Bottom Navigation Bar (Spec requirement #20: Home | Tasks | Study | Routine | Profile) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 py-1.5 px-3">
-        <div className="flex items-center justify-around">
+      <nav aria-label="Mobile navigation" className="mobile-navigation xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 py-1.5 px-3">
+        <div className="mx-auto grid max-w-xl grid-cols-5">
           {navItems.map((item) => {
             const active = currentTab === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => onChangeTab(item.id)}
-                className={`flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-2xl transition-all ${
+                className={`flex min-h-11 flex-col items-center justify-center gap-0.5 py-1 px-1 rounded-2xl transition-colors ${
                   active
-                    ? "text-indigo-600 dark:text-indigo-400 font-bold scale-105"
+                    ? "text-indigo-600 dark:text-indigo-400 font-bold"
                     : "text-slate-500 dark:text-slate-400"
                 }`}
               >

@@ -120,8 +120,8 @@ export const AdminPortalModal = ({ isOpen, onClose }) => {
       s.grade?.toLowerCase().includes(search.toLowerCase()),
   );
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+    <div className="dialog-overlay fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-in fade-in">
+      <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-4xl max-h-[90dvh] flex flex-col shadow-2xl overflow-hidden">
         {/* Modal Header */}
         <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-900 text-white">
           <div className="flex items-center gap-3">
@@ -151,7 +151,7 @@ export const AdminPortalModal = ({ isOpen, onClose }) => {
 
         {/* Not Authenticated: Passcode Screen */}
         {!isAuthenticated ? (
-          <div className="p-8 sm:p-12 text-center max-w-md mx-auto my-auto space-y-5">
+          <div className="w-full p-5 sm:p-12 text-center max-w-md mx-auto my-auto space-y-5">
             <div className="w-14 h-14 rounded-3xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto">
               <Lock className="w-7 h-7" />
             </div>
@@ -205,11 +205,11 @@ export const AdminPortalModal = ({ isOpen, onClose }) => {
             </div>
 
             {/* Navigation Tabs */}
-            <div className="flex items-center justify-between px-5 pt-3 border-b border-slate-100 dark:border-slate-800">
-              <div className="flex gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-5 pt-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setActiveTab("students")}
-                  className={`px-4 py-2 text-xs font-bold border-b-2 flex items-center gap-1.5 transition-colors ${
+                  className={`px-2 sm:px-4 py-2 text-xs font-bold border-b-2 flex items-center gap-1.5 transition-colors ${
                     activeTab === "students"
                       ? "border-indigo-600 text-indigo-600 dark:text-indigo-400"
                       : "border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
@@ -221,7 +221,7 @@ export const AdminPortalModal = ({ isOpen, onClose }) => {
 
                 <button
                   onClick={() => setActiveTab("feedback")}
-                  className={`px-4 py-2 text-xs font-bold border-b-2 flex items-center gap-1.5 transition-colors ${
+                  className={`px-2 sm:px-4 py-2 text-xs font-bold border-b-2 flex items-center gap-1.5 transition-colors ${
                     activeTab === "feedback"
                       ? "border-indigo-600 text-indigo-600 dark:text-indigo-400"
                       : "border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
@@ -233,7 +233,7 @@ export const AdminPortalModal = ({ isOpen, onClose }) => {
 
                 <button
                   onClick={() => setActiveTab("config")}
-                  className={`px-4 py-2 text-xs font-bold border-b-2 flex items-center gap-1.5 transition-colors ${
+                  className={`px-2 sm:px-4 py-2 text-xs font-bold border-b-2 flex items-center gap-1.5 transition-colors ${
                     activeTab === "config"
                       ? "border-indigo-600 text-indigo-600 dark:text-indigo-400"
                       : "border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
@@ -280,8 +280,8 @@ export const AdminPortalModal = ({ isOpen, onClose }) => {
                     </button>
                   </div>
 
-                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
-                    <table className="w-full text-left text-xs">
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-x-auto">
+                    <table className="w-full min-w-[640px] text-left text-xs">
                       <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 uppercase font-semibold">
                         <tr>
                           <th className="p-3">Student</th>

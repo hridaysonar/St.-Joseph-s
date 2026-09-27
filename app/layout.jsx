@@ -1,5 +1,7 @@
 import "./globals.css";
 
+export const viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", interactiveWidget: "resizes-content" };
+
 export const metadata = {
   title: { default: "Student Life | Plan, Study & Excel", template: "%s | Student Life" },
   icons: { icon: "/img/website%20logo.jpeg", apple: "/img/website%20logo.jpeg" },

@@ -2,9 +2,93 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
+  html {
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply antialiased text-slate-900 bg-slate-50 dark:bg-slate-950 dark:text-slate-100;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-wrap: anywhere;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  :where(.flex, .inline-flex, .grid) > * {
+    min-width: 0;
+  }
+
+  input, select, textarea {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  svg.lucide {
+    flex-shrink: 0;
+  }
+}
+
+/* Keep dialogs inside the visible viewport, including landscape phones. */
+.dialog-overlay {
+  padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right)) max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+html:has(.dialog-overlay) {
+  overflow: hidden;
+}
+
+.dialog-panel {
+  min-height: 0;
+  max-height: calc(100dvh - max(0.75rem, env(safe-area-inset-top)) - max(0.75rem, env(safe-area-inset-bottom)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.dialog-panel > * {
+  flex-shrink: 0;
+}
+
+.dialog-panel > .flex-1 {
+  min-height: 0;
+  flex-shrink: 1;
+}
+
+.mobile-navigation {
+  padding-bottom: max(0.375rem, env(safe-area-inset-bottom));
+  padding-left: max(0.75rem, env(safe-area-inset-left));
+  padding-right: max(0.75rem, env(safe-area-inset-right));
+}
+
+.assistant-launcher {
+  bottom: calc(5rem + env(safe-area-inset-bottom));
+  right: max(1rem, env(safe-area-inset-right));
+}
+
+@media (min-width: 80rem) {
+  .assistant-launcher {
+    bottom: 2rem;
+  }
+}
+
+@media (max-width: 639px) {
+  /* Prevent iOS from zooming the whole layout when a form field receives focus. */
+  input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+    font-size: 16px;
+  }
+
+  .dialog-panel .grid-cols-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

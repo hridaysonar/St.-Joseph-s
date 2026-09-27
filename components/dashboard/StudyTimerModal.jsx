@@ -98,8 +98,8 @@ export const StudyTimerModal = ({
     ((presetDuration * 60 - timeLeft) / (presetDuration * 60)) * 100,
   );
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-6 shadow-2xl space-y-6 relative overflow-hidden">
+    <div className="dialog-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-in fade-in">
+      <div className="dialog-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-6 shadow-2xl space-y-6 relative overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -140,7 +140,7 @@ export const StudyTimerModal = ({
         </div>
 
         {/* Preset Selector */}
-        <div className="flex justify-center gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {[15, 25, 50].map((m) => (
             <button
               key={m}
