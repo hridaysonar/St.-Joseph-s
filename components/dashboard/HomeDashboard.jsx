@@ -9,15 +9,12 @@ import {
   BookOpen,
   Calendar,
   Play,
-  Moon,
   ChevronRight,
 } from "lucide-react";
 export const HomeDashboard = ({
   profile,
   tasks,
   onUpdateTasks,
-  dailyNamaz,
-  onUpdateNamaz,
   subjects,
   exams,
   routinePeriods,
@@ -40,17 +37,6 @@ export const HomeDashboard = ({
   const todayStudyMinutes = studyLogs
     .filter((l) => l.date === todayStr)
     .reduce((acc, curr) => acc + curr.minutes, 0);
-  // Namaz completed
-  const namazCompleted = Object.values(dailyNamaz.prayers).filter(
-    Boolean,
-  ).length;
-  const toggleNamaz = (prayerName) => {
-    const updatedPrayers = {
-      ...dailyNamaz.prayers,
-      [prayerName]: !dailyNamaz.prayers[prayerName],
-    };
-    onUpdateNamaz({ ...dailyNamaz, prayers: updatedPrayers });
-  };
   // Tasks today
   const pendingTasks = tasks.filter((t) => !t.completed);
   const completedTasks = tasks.filter((t) => t.completed);
@@ -149,7 +135,7 @@ export const HomeDashboard = ({
         </div>
       </div>
 
-      {/* KPI Cards Row: Today's Progress, Namaz, Study Time, Streak */}
+      {/* KPI Cards Row: Study Time, Subjects, Tasks, Syllabus */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
         {/* Study Time Today */}
         <div
@@ -170,23 +156,10 @@ export const HomeDashboard = ({
           </span>
         </div>
 
-        {/* Namaz Progress */}
-        <div
-          onClick={() => onNavigateTab("tasks")}
-          className="p-4 rounded-3xl border border-emerald-200/80 dark:border-emerald-950/60 bg-white dark:bg-slate-900 shadow-xs hover:border-emerald-400 transition-all cursor-pointer group"
-        >
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              Namaz
-            </span>
-            <Moon className="w-4 h-4 text-emerald-500 group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-2xl font-black text-slate-900 dark:text-white">
-            {namazCompleted}/5
-          </div>
-          <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
-            {Math.round((namazCompleted / 5) * 100)}% Completed
-          </span>
+        <div className="p-4 rounded-3xl border border-emerald-200/80 dark:border-emerald-950/60 bg-white dark:bg-slate-900 shadow-xs">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-2"><span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Subjects</span><BookOpen className="w-4 h-4 text-emerald-500" /></div>
+          <div className="text-2xl font-black">7</div>
+          <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">Your academic subjects</span>
         </div>
 
         {/* Tasks Progress */}
@@ -230,44 +203,20 @@ export const HomeDashboard = ({
 
       {/* Main Two-Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column (2 Cols wide): Today's Tasks & Namaz Quick Bar */}
+        {/* Left Column (2 Cols wide): Today's Tasks & Subjects */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Namaz Quick Interactive Row */}
-          <div className="p-5 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-3">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <Moon className="w-4 h-4 text-emerald-500" />
-                <h3 className="font-bold text-sm text-slate-900 dark:text-white">
-                  Today&apos;s Namaz Checkoff
-                </h3>
-              </div>
-              <span className="text-xs text-slate-400">Tap to mark prayed</span>
-            </div>
-
-            <div className="grid grid-cols-3 min-[400px]:grid-cols-5 gap-2">
-              {["Fajr", "Zuhr", "Asr", "Maghrib", "Isha"].map((prayer) => {
-                const done = dailyNamaz.prayers[prayer];
-                return (
-                  <button
-                    key={prayer}
-                    onClick={() => toggleNamaz(prayer)}
-                    className={`py-2 px-1 rounded-2xl border text-center transition-all ${
-                      done
-                        ? "border-emerald-500 bg-emerald-500 text-white font-bold shadow-xs"
-                        : "border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:border-emerald-400"
-                    }`}
-                  >
-                    <div className="text-[11px] sm:text-xs truncate">
-                      {prayer}
-                    </div>
-                    <div className="text-[9px] opacity-80">
-                      {done ? "✓ Done" : "Pending"}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          <section aria-labelledby="home-subjects-heading" className="p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs">
+            <div className="flex items-center gap-2"><BookOpen className="h-5 w-5 text-indigo-500" /><h2 id="home-subjects-heading" className="font-bold text-base">My Subjects</h2></div>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Your everyday learning, all in one place.</p>
+            <ol className="mt-4 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
+              {["Physics", "Chemistry", "Biology", "Higher math", "Bangla", "English", "ICT"].map((name, index) => (
+                <li key={name} className="flex min-h-20 items-center gap-2 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-3 dark:border-indigo-900/50 dark:bg-indigo-950/30">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-bold text-indigo-600 dark:bg-slate-800 dark:text-indigo-300">{index + 1}</span>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">{name}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
 
           {/* Today's Tasks Quick List */}
           <div className="p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-4">

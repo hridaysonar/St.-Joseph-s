@@ -32,11 +32,11 @@ export const AuthModal = ({ isOpen, onClose, onSuccess, currentProfile }) => {
   const [regSchool, setRegSchool] = useState(
     "St. Joseph's School and College, Bonpara",
   );
-  const [regGrade, setRegGrade] = useState("Science (Eleven)");
+  const [regGrade, setRegGrade] = useState("Science (TWELVE)");
   const [regGroup, setRegGroup] = useState("Science (Sci-B)");
-  const [regBatch, setRegBatch] = useState("Batch 2026");
-  const [regStudentId, setRegStudentId] = useState("SJSC-2026-204");
-  const [regRoom, setRegRoom] = useState("Science Room No: 204");
+  const [regBatch, setRegBatch] = useState("Batch 2027");
+  const [regStudentId, setRegStudentId] = useState("SJSC-2027-404");
+  const [regRoom, setRegRoom] = useState("Science Room No: 404");
   // OTP state
   const [otpPhone, setOtpPhone] = useState(
     currentProfile.phone || "+880 1712-345678",
@@ -150,9 +150,9 @@ export const AuthModal = ({ isOpen, onClose, onSuccess, currentProfile }) => {
         studentName: "Nahid Hasan",
         email: "nahid.hasan@gmail.com",
         school: "St. Joseph's School and College, Bonpara",
-        grade: "Science (Eleven)",
+        grade: "Science (TWELVE)",
         group: "Science (Sci-B)",
-        batch: "Batch 2026",
+        batch: "Batch 2027",
         studentId: "SJSC-2026-204",
         classroomNo: "Science Room No: 204",
       });
@@ -319,13 +319,13 @@ export const AuthModal = ({ isOpen, onClose, onSuccess, currentProfile }) => {
                   onSuccess({
                     studentName: "Nahid Hasan",
                     school: "St. Joseph's School and College, Bonpara",
-                    grade: "Science (Eleven)",
+                    grade: "Science (TWELVE)",
                     group: "Science (Sci-B)",
-                    batch: "Batch 2026",
-                    studentId: "SJSC-2026-204",
+                    batch: "Batch 2027",
+                    studentId: "SJSC-2027-404",
                     email: "nahid.hasan@gmail.com",
                     phone: "+880 1712-345678",
-                    classroomNo: "Science Room No: 204",
+                    classroomNo: "Science Room No: 404",
                   });
                   onClose();
                 }}

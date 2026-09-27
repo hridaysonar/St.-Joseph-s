@@ -70,7 +70,7 @@ export async function getApiRoutine(req) {
     institution: "St. Joseph's School and College, Bonpara",
     location: "Bonpara, Natore",
     title: "Class Routine - 2026",
-    class: "Science (Eleven)",
+    class: "Science (TWELVE)",
     studentName: "Nahid Hasan",
     classroomNo: "Science Room No: 204",
     specialNote:
@@ -112,9 +112,9 @@ export async function postApiAuthRegister(req) {
       school: school
         ? school.trim()
         : "St. Joseph's School and College, Bonpara",
-      grade: grade ? grade.trim() : "Science (Eleven)",
+      grade: grade ? grade.trim() : "Science (TWELVE)",
       group: group ? group.trim() : "Science (Sci-B)",
-      batch: batch ? batch.trim() : "Batch 2026",
+      batch: batch ? batch.trim() : "Batch 2027",
       studentId: studentId
         ? studentId.trim()
         : "SJSC-" + Math.floor(100 + Math.random() * 900),
@@ -254,9 +254,9 @@ export async function postApiStudentAi(req) {
     const studentName = context?.studentName || "Nahid Hasan";
     const school =
       context?.school || "St. Joseph's School and College, Bonpara";
-    const grade = context?.grade || "Science (Eleven)";
+    const grade = context?.grade || "Science (TWELVE)";
     const group = context?.group || "Science (Sci-B)";
-    const classroomNo = context?.classroomNo || "Science Room No: 204";
+    const classroomNo = context?.classroomNo || "Science Room No: 404";
     const subjects = Array.isArray(context?.subjects)
       ? context.subjects
           .map(

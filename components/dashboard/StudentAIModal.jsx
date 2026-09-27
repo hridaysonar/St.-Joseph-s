@@ -14,7 +14,7 @@ export const StudentAIModal = ({
     {
       id: "welcome-msg",
       role: "assistant",
-      text: `Assalamu Alaikum, **${profile.studentName}**! 🎓\nI am your **Student AI** companion for **${profile.school}** (Science Eleven, Room 204).\n\nHow can I help you today?\n- Ask **"What should I study today?"** based on your routine & syllabus\n- Ask about upcoming **Quiz Week** (Tuesday English, Saturday Physics)\n- Request a personalized 25-minute or 2-hour study plan\n- Get concept explanations for Physics, Chemistry, Biology, Math, ICT!`,
+      text: `Assalamu Alaikum, **${profile.studentName}**! 🎓\nI am your **Student AI** companion for **${profile.school}** (Science TWELVE, Room 204).\n\nHow can I help you today?\n- Ask **"What should I study today?"** based on your routine & syllabus\n- Ask about upcoming **Quiz Week** (Tuesday English, Saturday Physics)\n- Request a personalized 25-minute or 2-hour study plan\n- Get concept explanations for Physics, Chemistry, Biology, Math, ICT!`,
       timestamp: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",

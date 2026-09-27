@@ -38,6 +38,7 @@ export const Navigation = ({
       label: "Routine",
       icon: <CalendarDays className="w-5 h-5" />,
     },
+    { id: "namaz", label: "Namaz", icon: <Moon className="w-5 h-5" /> },
     { id: "profile", label: "Profile", icon: <User className="w-5 h-5" /> },
   ];
   return (
@@ -71,7 +72,7 @@ export const Navigation = ({
                 <button
                   key={item.id}
                   onClick={() => onChangeTab(item.id)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                  className={`px-2 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
                     active
                       ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-bold shadow-xs"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -195,9 +196,9 @@ export const Navigation = ({
         <span>Ask Student AI</span>
       </button>
 
-      {/* Mobile Bottom Navigation Bar (Spec requirement #20: Home | Tasks | Study | Routine | Profile) */}
+      {/* Mobile and tablet navigation */}
       <nav aria-label="Mobile navigation" className="mobile-navigation xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 py-1.5 px-3">
-        <div className="mx-auto grid max-w-xl grid-cols-5">
+        <div className="mx-auto grid max-w-xl grid-cols-6">
           {navItems.map((item) => {
             const active = currentTab === item.id;
             return (

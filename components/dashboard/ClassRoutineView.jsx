@@ -102,7 +102,7 @@ export const ClassRoutineView = ({
         <div>
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
-              Science (Eleven) • Room 204
+              Science (TWLVE) • Room 404
             </span>
             <span className="text-[10px] font-semibold text-slate-400">
               Class Routine - 2026
@@ -205,7 +205,7 @@ export const ClassRoutineView = ({
 
               <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-700 dark:text-slate-300 mt-3 pt-3 border-t border-slate-200/80 dark:border-slate-800">
                 <span>
-                  <b>Class:</b> Science (Eleven)
+                  <b>Class:</b> Science (TWELVE)
                 </span>
                 <span className="text-slate-300 dark:text-slate-700">|</span>
                 <span>

@@ -1,4 +1,5 @@
 "use client";
+import NamazView from "./NamazView.jsx";
 import TeamSection from "../common/TeamSection.jsx";
 import SiteFooter from "../common/SiteFooter.jsx";
 
@@ -224,8 +225,6 @@ export default function App() {
             profile={profile}
             tasks={tasks}
             onUpdateTasks={handleUpdateTasks}
-            dailyNamaz={dailyNamaz}
-            onUpdateNamaz={handleUpdateNamaz}
             subjects={subjects}
             exams={exams}
             routinePeriods={routinePeriods}
@@ -237,12 +236,12 @@ export default function App() {
           />
         )}
 
+        {currentTab === "namaz" && <NamazView dailyNamaz={dailyNamaz} onUpdateNamaz={handleUpdateNamaz} />}
+
         {currentTab === "tasks" && (
           <TaskManagement
             tasks={tasks}
             onUpdateTasks={handleUpdateTasks}
-            dailyNamaz={dailyNamaz}
-            onUpdateNamaz={handleUpdateNamaz}
           />
         )}
 
