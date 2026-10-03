@@ -1,0 +1,482 @@
+{
+  "syllabus": {
+    "class": "HSC 2027",
+    "group": "Science",
+
+    "subjects": [
+      {
+        "id": "physics",
+        "name": "পদার্থবিজ্ঞান",
+        "papers": [
+          {
+            "id": "physics_1st",
+            "name": "১ম পত্র",
+            "chapters": [
+              {
+                "id": "physics_1_01",
+                "name": "ভৌত জগৎ ও পরিমাপ",
+                "completed": false
+              },
+              {
+                "id": "physics_1_02",
+                "name": "ভেক্টর",
+                "completed": false
+              },
+              {
+                "id": "physics_1_03",
+                "name": "গতিবিদ্যা",
+                "completed": false
+              },
+              {
+                "id": "physics_1_04",
+                "name": "নিউটনিয়ান বলবিদ্যা",
+                "completed": false
+              },
+              {
+                "id": "physics_1_05",
+                "name": "কাজ, শক্তি ও ক্ষমতা",
+                "completed": false
+              },
+              {
+                "id": "physics_1_06",
+                "name": "মহাকর্ষ ও অভিকর্ষ",
+                "completed": false
+              },
+              {
+                "id": "physics_1_07",
+                "name": "পদার্থের গাঠনিক ধর্ম",
+                "completed": false
+              },
+              {
+                "id": "physics_1_08",
+                "name": "পর্যাবৃত্তিক গতি",
+                "completed": false
+              },
+              {
+                "id": "physics_1_09",
+                "name": "তরঙ্গ",
+                "completed": false
+              },
+              {
+                "id": "physics_1_10",
+                "name": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব",
+                "completed": false
+              }
+            ]
+          },
+
+          {
+            "id": "physics_2nd",
+            "name": "২য় পত্র",
+            "chapters": [
+              {
+                "id": "physics_2_01",
+                "name": "তাপগতিবিদ্যা",
+                "completed": false
+              },
+              {
+                "id": "physics_2_02",
+                "name": "স্থির তড়িৎ",
+                "completed": false
+              },
+              {
+                "id": "physics_2_03",
+                "name": "চল তড়িৎ",
+                "completed": false
+              },
+              {
+                "id": "physics_2_04",
+                "name": "তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চুম্বকত্ব",
+                "completed": false
+              },
+              {
+                "id": "physics_2_05",
+                "name": "তড়িৎ চৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ",
+                "completed": false
+              },
+              {
+                "id": "physics_2_06",
+                "name": "জ্যামিতিক আলোকবিজ্ঞান",
+                "completed": false
+              },
+              {
+                "id": "physics_2_07",
+                "name": "ভৌত আলোকবিজ্ঞান",
+                "completed": false
+              },
+              {
+                "id": "physics_2_08",
+                "name": "আধুনিক পদার্থবিজ্ঞান",
+                "completed": false
+              },
+              {
+                "id": "physics_2_09",
+                "name": "পরমাণুর মডেল এবং নিউক্লিয়ার পদার্থবিজ্ঞান",
+                "completed": false
+              },
+              {
+                "id": "physics_2_10",
+                "name": "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স",
+                "completed": false
+              },
+              {
+                "id": "physics_2_11",
+                "name": "জ্যোতির্বিজ্ঞান",
+                "completed": false
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": "chemistry",
+        "name": "রসায়ন",
+        "papers": [
+          {
+            "id": "chemistry_1st",
+            "name": "১ম পত্র",
+            "chapters": [
+              {
+                "id": "chemistry_1_01",
+                "name": "ল্যাবরেটরির নিরাপদ ব্যবহার",
+                "completed": false
+              },
+              {
+                "id": "chemistry_1_02",
+                "name": "গুণগত রসায়ন",
+                "completed": false
+              },
+              {
+                "id": "chemistry_1_03",
+                "name": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
+                "completed": false
+              },
+              {
+                "id": "chemistry_1_04",
+                "name": "রাসায়নিক পরিবর্তন",
+                "completed": false
+              },
+              {
+                "id": "chemistry_1_05",
+                "name": "কর্মমুখী রসায়ন",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "id": "chemistry_2nd",
+            "name": "২য় পত্র",
+            "chapters": [
+              {
+                "id": "chemistry_2_01",
+                "name": "পরিবেশ রসায়ন",
+                "completed": false
+              },
+              {
+                "id": "chemistry_2_02",
+                "name": "জৈব রসায়ন",
+                "completed": false
+              },
+              {
+                "id": "chemistry_2_03",
+                "name": "পরিমাণগত রসায়ন",
+                "completed": false
+              },
+              {
+                "id": "chemistry_2_04",
+                "name": "তড়িৎ রসায়ন",
+                "completed": false
+              },
+              {
+                "id": "chemistry_2_05",
+                "name": "অর্থনৈতিক রসায়ন",
+                "completed": false
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": "higher_math",
+        "name": "উচ্চতর গণিত",
+        "papers": [
+          {
+            "id": "higher_math_1st",
+            "name": "১ম পত্র",
+            "chapters": [
+              {
+                "id": "hm_1_01",
+                "name": "ম্যাট্রিক্স ও নির্ণায়ক",
+                "completed": false
+              },
+              { "id": "hm_1_02", "name": "ভেক্টর", "completed": false },
+              { "id": "hm_1_03", "name": "সরলরেখা", "completed": false },
+              { "id": "hm_1_04", "name": "বৃত্ত", "completed": false },
+              {
+                "id": "hm_1_05",
+                "name": "বিন্যাস ও সমাবেশ",
+                "completed": false
+              },
+              {
+                "id": "hm_1_06",
+                "name": "ত্রিকোণমিতিক অনুপাত",
+                "completed": false
+              },
+              {
+                "id": "hm_1_07",
+                "name": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত",
+                "completed": false
+              },
+              {
+                "id": "hm_1_08",
+                "name": "ফাংশন ও ফাংশনের লেখচিত্র",
+                "completed": false
+              },
+              { "id": "hm_1_09", "name": "অন্তরীকরণ", "completed": false },
+              { "id": "hm_1_10", "name": "যোগজীকরণ", "completed": false }
+            ]
+          },
+          {
+            "id": "higher_math_2nd",
+            "name": "২য় পত্র",
+            "chapters": [
+              {
+                "id": "hm_2_01",
+                "name": "বাস্তব সংখ্যা ও অসমতা",
+                "completed": false
+              },
+              {
+                "id": "hm_2_02",
+                "name": "যোগাশ্রয়ী প্রোগ্রাম",
+                "completed": false
+              },
+              { "id": "hm_2_03", "name": "জটিল সংখ্যা", "completed": false },
+              {
+                "id": "hm_2_04",
+                "name": "বহুপদী ও বহুপদী সমীকরণ",
+                "completed": false
+              },
+              {
+                "id": "hm_2_05",
+                "name": "দ্বিপদী বিস্তৃতি",
+                "completed": false
+              },
+              { "id": "hm_2_06", "name": "কণিক", "completed": false },
+              {
+                "id": "hm_2_07",
+                "name": "বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ",
+                "completed": false
+              },
+              { "id": "hm_2_08", "name": "স্থিতিবিদ্যা", "completed": false },
+              {
+                "id": "hm_2_09",
+                "name": "সমতলে বস্তুকণার গতি",
+                "completed": false
+              },
+              {
+                "id": "hm_2_10",
+                "name": "বিস্তার পরিমাপ ও সম্ভাবনা",
+                "completed": false
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": "biology",
+        "name": "জীববিজ্ঞান",
+        "papers": [
+          {
+            "id": "biology_1st",
+            "name": "১ম পত্র",
+            "chapters": [
+              { "id": "bio_1_01", "name": "কোষ ও এর গঠন", "completed": false },
+              { "id": "bio_1_02", "name": "কোষ বিভাজন", "completed": false },
+              { "id": "bio_1_03", "name": "কোষ রসায়ন", "completed": false },
+              { "id": "bio_1_04", "name": "অণুজীব", "completed": false },
+              {
+                "id": "bio_1_05",
+                "name": "শৈবাল ও ছত্রাক",
+                "completed": false
+              },
+              {
+                "id": "bio_1_06",
+                "name": "ব্রায়োফাইটা ও টেরিডোফাইটা",
+                "completed": false
+              },
+              {
+                "id": "bio_1_07",
+                "name": "নগ্নবীজী ও আবৃতবীজী উদ্ভিদ",
+                "completed": false
+              },
+              {
+                "id": "bio_1_08",
+                "name": "টিস্যু ও টিস্যুতন্ত্র",
+                "completed": false
+              },
+              {
+                "id": "bio_1_09",
+                "name": "উদ্ভিদ শারীরতত্ত্ব",
+                "completed": false
+              },
+              { "id": "bio_1_10", "name": "উদ্ভিদ প্রজনন", "completed": false },
+              { "id": "bio_1_11", "name": "জীবপ্রযুক্তি", "completed": false },
+              {
+                "id": "bio_1_12",
+                "name": "জীবের পরিবেশ, বিস্তার ও সংরক্ষণ",
+                "completed": false
+              }
+            ]
+          },
+
+          {
+            "id": "biology_2nd",
+            "name": "২য় পত্র",
+            "chapters": [
+              {
+                "id": "bio_2_01",
+                "name": "প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস",
+                "completed": false
+              },
+              {
+                "id": "bio_2_02",
+                "name": "প্রাণীর পরিচিতি",
+                "completed": false
+              },
+              {
+                "id": "bio_2_03",
+                "name": "মানব শারীরতত্ত্ব: পরিপাক ও শোষণ",
+                "completed": false
+              },
+              {
+                "id": "bio_2_04",
+                "name": "মানব শারীরতত্ত্ব: রক্ত ও সঞ্চালন",
+                "completed": false
+              },
+              {
+                "id": "bio_2_05",
+                "name": "মানব শারীরতত্ত্ব: শ্বাসক্রিয়া ও শ্বসন",
+                "completed": false
+              },
+              {
+                "id": "bio_2_06",
+                "name": "মানব শারীরতত্ত্ব: বর্জ্য ও নিষ্কাশন",
+                "completed": false
+              },
+              {
+                "id": "bio_2_07",
+                "name": "মানব শারীরতত্ত্ব: চলন ও অঙ্গচালনা",
+                "completed": false
+              },
+              {
+                "id": "bio_2_08",
+                "name": "মানব শারীরতত্ত্ব: সমন্বয় ও নিয়ন্ত্রণ",
+                "completed": false
+              },
+              {
+                "id": "bio_2_09",
+                "name": "মানব জীবনের ধারাবাহিকতা",
+                "completed": false
+              },
+              {
+                "id": "bio_2_10",
+                "name": "মানবদেহের প্রতিরক্ষা",
+                "completed": false
+              },
+              {
+                "id": "bio_2_11",
+                "name": "জিনতত্ত্ব ও বিবর্তন",
+                "completed": false
+              },
+              { "id": "bio_2_12", "name": "প্রাণীর আচরণ", "completed": false }
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": "bangla",
+        "name": "বাংলা",
+        "papers": [
+          {
+            "id": "bangla_1st",
+            "name": "১ম পত্র",
+            "chapters": [],
+            "note": "সাহিত্যপাঠ ও সহপাঠের গদ্য, কবিতা, উপন্যাস ও নাটক আলাদা lesson/item হিসেবে রাখা হবে।"
+          },
+          {
+            "id": "bangla_2nd",
+            "name": "২য় পত্র",
+            "chapters": [],
+            "note": "ব্যাকরণ ও নির্মিতি topic হিসেবে রাখা হবে।"
+          }
+        ]
+      },
+
+      {
+        "id": "english",
+        "name": "ইংরেজি",
+        "papers": [
+          {
+            "id": "english_1st",
+            "name": "1st Paper",
+            "units": [],
+            "note": "English for Today-এর Unit → Lesson structure ব্যবহার করা হবে।"
+          },
+          {
+            "id": "english_2nd",
+            "name": "2nd Paper",
+            "topics": [],
+            "note": "Grammar ও Writing আলাদা section হিসেবে রাখা হবে।"
+          }
+        ]
+      },
+
+      {
+        "id": "ict",
+        "name": "তথ্য ও যোগাযোগ প্রযুক্তি",
+        "papers": [
+          {
+            "id": "ict_main",
+            "name": "ICT",
+            "chapters": [
+              {
+                "id": "ict_01",
+                "name": "তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত",
+                "completed": false
+              },
+              {
+                "id": "ict_02",
+                "name": "কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং",
+                "completed": false
+              },
+              {
+                "id": "ict_03",
+                "name": "সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস",
+                "completed": false
+              },
+              {
+                "id": "ict_04",
+                "name": "ওয়েব ডিজাইন পরিচিতি ও HTML",
+                "completed": false
+              },
+              {
+                "id": "ict_05",
+                "name": "প্রোগ্রামিং ভাষা",
+                "completed": false
+              },
+              {
+                "id": "ict_06",
+                "name": "ডেটাবেজ ম্যানেজমেন্ট সিস্টেম",
+                "completed": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

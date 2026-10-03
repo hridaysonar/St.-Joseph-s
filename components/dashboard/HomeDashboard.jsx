@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { getHomeSubjectCards } from "../../lib/syllabus.js";
 import {
   Sparkles,
   CheckCircle2,
@@ -23,6 +24,7 @@ export const HomeDashboard = ({
   onOpenTimer,
   onOpenAI,
   onOpenSetup,
+  onOpenSubject,
 }) => {
   // Time of day greeting
   const getGreeting = () => {
@@ -209,10 +211,13 @@ export const HomeDashboard = ({
             <div className="flex items-center gap-2"><BookOpen className="h-5 w-5 text-indigo-500" /><h2 id="home-subjects-heading" className="font-bold text-base">My Subjects</h2></div>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Your everyday learning, all in one place.</p>
             <ol className="mt-4 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
-              {["Physics", "Chemistry", "Biology", "Higher math", "Bangla", "English", "ICT"].map((name, index) => (
-                <li key={name} className="flex min-h-20 items-center gap-2 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-3 dark:border-indigo-900/50 dark:bg-indigo-950/30">
+              {getHomeSubjectCards(subjects).map(({ label, subject }, index) => (
+                <li key={subject.id}>
+                  <button type="button" onClick={() => onOpenSubject(subject)} aria-label={`${label} — পত্র ও অধ্যায় দেখুন`} className="group flex min-h-20 w-full items-center gap-2 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-3 text-left transition hover:border-indigo-300 hover:bg-indigo-100/70 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:border-indigo-900/50 dark:bg-indigo-950/30 dark:hover:bg-indigo-900/40 dark:focus-visible:ring-offset-slate-900">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white text-xs font-bold text-indigo-600 dark:bg-slate-800 dark:text-indigo-300">{index + 1}</span>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">{name}</span>
+                  <span className="flex-1 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">{label}</span>
+                  <ChevronRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-indigo-400 transition-transform group-hover:translate-x-0.5" />
+                  </button>
                 </li>
               ))}
             </ol>

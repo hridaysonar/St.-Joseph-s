@@ -71,6 +71,7 @@ export default function App() {
   }, [isDarkMode]);
   // Main Navigation State
   const [currentTab, setCurrentTab] = useState("home");
+  const [studySubjectId, setStudySubjectId] = useState(null);
   // App Data States
   const [profile, setProfile] = useState(loadProfile);
   const [tasks, setTasks] = useState(loadTasks);
@@ -233,6 +234,14 @@ export default function App() {
             onOpenTimer={() => setIsTimerOpen(true)}
             onOpenAI={() => setIsAIOpen(true)}
             onOpenSetup={() => setIsSetupOpen(true)}
+            onOpenSubject={(subject) => {
+              if (!subjects.some((item) => item.id === subject.id)) {
+                handleUpdateSubjects([...subjects, subject]);
+              }
+              setStudySubjectId(subject.id);
+              setCurrentTab("study");
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
           />
         )}
 
@@ -247,6 +256,7 @@ export default function App() {
 
         {currentTab === "study" && (
           <StudySection
+            initialSubjectId={studySubjectId}
             subjects={subjects}
             onUpdateSubjects={handleUpdateSubjects}
             onOpenSyllabusSetup={() => setIsSetupOpen(true)}
@@ -326,6 +336,7 @@ export default function App() {
 
       {/* Academic & Syllabus Setup Modal */}
       <SyllabusSetupModal
+        key={isSetupOpen ? "setup-open" : "setup-closed"}
         isOpen={isSetupOpen}
         onClose={() => setIsSetupOpen(false)}
         onSave={handleSaveSyllabusSetup}

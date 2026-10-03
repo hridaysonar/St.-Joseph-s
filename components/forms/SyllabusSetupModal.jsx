@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { createHscSubjects } from "../../lib/syllabus.js";
 import {
   X,
   BookOpen,
@@ -217,25 +218,20 @@ export const SyllabusSetupModal = ({
   // Step 2: Subject & Chapters Setup (not blindly assumed!)
   const [subjects, setSubjects] = useState(() => {
     if (initialSubjects && initialSubjects.length > 0) return initialSubjects;
-    const template = PRESET_SUBJECT_TEMPLATES["Science"];
-    return template.map((tmpl, idx) => ({
-      id: `sub-${idx}-${Date.now()}`,
-      name: tmpl.name,
-      color: tmpl.color,
-      chapters: tmpl.chapters.map((chName, cIdx) => ({
-        id: `ch-${idx}-${cIdx}-${Date.now()}`,
-        name: chName,
-        status: "Not Started",
-        revisionCount: 0,
-      })),
-    }));
+    return createHscSubjects();
   });
   const [activeSubjectIdx, setActiveSubjectIdx] = useState(0);
   const [newSubjectName, setNewSubjectName] = useState("");
   const [newChapterName, setNewChapterName] = useState("");
+  const [selectedPaperId, setSelectedPaperId] = useState("");
   if (!isOpen) return null;
   const handleGroupSelect = (selectedGroup) => {
     setGroup(selectedGroup);
+    if (selectedGroup === "Science" && gradeLevel.startsWith("HSC")) {
+      setSubjects(createHscSubjects());
+      setActiveSubjectIdx(0);
+      return;
+    }
     const templateKey =
       Object.keys(PRESET_SUBJECT_TEMPLATES).find((k) =>
         selectedGroup.includes(k.split(" ")[0]),
@@ -300,6 +296,9 @@ export const SyllabusSetupModal = ({
     const newCh = {
       id: `ch-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
       name: newChapterName.trim(),
+      paperId:
+        currentSub.papers?.find((paper) => paper.id === selectedPaperId)?.id ||
+        currentSub.papers?.[0]?.id,
       status: "Not Started",
       revisionCount: 0,
     };
@@ -539,7 +538,18 @@ export const SyllabusSetupModal = ({
                           <span className="w-5 h-5 rounded-md bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-bold text-[10px] text-slate-500">
                             {chIdx + 1}
                           </span>
-                          <span className="truncate">{ch.name}</span>
+                          <span className="truncate">
+                            {ch.name}
+                            {ch.paperId && (
+                              <span className="ml-2 text-indigo-500">
+                                {
+                                  subjects[activeSubjectIdx].papers?.find(
+                                    (paper) => paper.id === ch.paperId,
+                                  )?.name
+                                }
+                              </span>
+                            )}
+                          </span>
                         </div>
                         {subjects[activeSubjectIdx].chapters.length > 1 && (
                           <button
@@ -556,6 +566,31 @@ export const SyllabusSetupModal = ({
                   </div>
 
                   {/* Add Chapter Form */}
+                  {subjects[activeSubjectIdx].papers?.length > 0 && (
+                    <label className="mt-3 block text-xs text-slate-600 dark:text-slate-300">
+                      নতুন অধ্যায়ের পত্র
+                      <select
+                        aria-label="নতুন অধ্যায়ের পত্র"
+                        value={
+                          subjects[activeSubjectIdx].papers.some(
+                            (paper) => paper.id === selectedPaperId,
+                          )
+                            ? selectedPaperId
+                            : subjects[activeSubjectIdx].papers[0].id
+                        }
+                        onChange={(event) =>
+                          setSelectedPaperId(event.target.value)
+                        }
+                        className="ml-2 rounded-lg border border-slate-200 bg-white p-2 dark:border-slate-700 dark:bg-slate-900"
+                      >
+                        {subjects[activeSubjectIdx].papers.map((paper) => (
+                          <option key={paper.id} value={paper.id}>
+                            {paper.name}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  )}
                   <form
                     onSubmit={handleAddChapter}
                     className="flex gap-2 mt-3 pt-3 border-t border-slate-200 dark:border-slate-800"
