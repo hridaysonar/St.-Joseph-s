@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test:admin": "node --experimental-vm-modules --test tests/admin-system.test.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

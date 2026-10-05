@@ -83,12 +83,8 @@ Next.js internally rewrites the following existing URLs to the users route dispa
 - `/api/students/sync`
 - `/api/config`
 - `/api/feedback`
-- `/api/admin/login`
-- `/api/admin/students`
-- `/api/admin/config`
-- `/api/admin/feedbacks`
 
-Products and orders were not part of the original student app. Their requested model, service and route files are reserved read-only collection endpoints, requiring `x-admin-token`. They return empty lists when no records exist. No commerce interface or checkout is added.
+Products and orders were not part of the original student app. Their requested model, service and route files are reserved read-only collection endpoints, requiring the verified Admin session. They return empty lists when no records exist. No commerce interface or checkout is added.
 
 ## Environment and storage
 
@@ -97,7 +93,7 @@ For a new checkout, copy `.env.example` to `.env.local`. Existing connection set
 - `MONGODB_URI`: connection string; leave empty for local storage.
 - `MONGODB_DB_NAME`: defaults to `student_life`.
 - `GEMINI_API_KEY`: server-only Student AI key.
-- `ADMIN_SECRET`: admin login secret.
+- Admin email/password login and optional Google login: see [ADMIN_SETUP.md](ADMIN_SETUP.md). The legacy `ADMIN_SECRET` passcode is disabled.
 - `ADMIN_CONTACT_EMAIL`: support email.
 - `DATA_DIR`: optional persistent storage directory, defaults to `data`.
 
@@ -106,3 +102,7 @@ MongoDB connection failures fall back to `data/store.json`, preserving the exist
 ## Verification
 
 Use the lint and production build commands above. Check navigation, saved tasks after refresh, theme switching, contact feedback and login/register. Live MongoDB and AI functionality depend on working external credentials and connectivity.
+
+## Admin Control System
+
+The integrated `/admin` panel uses a server-verified Admin email/password, optional verified Google sign-in, persistent backend sessions, GridFS PDF storage, routine publishing, scoped chapter notes, additive syllabus management, reports and suggestions. Existing student data and local progress stay intact. Setup, storage changes, file inventory, tests and limitations are documented in [ADMIN_SETUP.md](ADMIN_SETUP.md). Run `npm run test:admin` for isolated backend and progress regression tests.

@@ -237,7 +237,7 @@ export const ProfileView = ({
                   </div>
                   <div>
                     <div className="text-xs font-bold text-slate-800 dark:text-slate-200">
-                      Admin Portal (Passcode Protected)
+                      Admin Portal (Email / Password)
                     </div>
                     <div className="text-[11px] text-slate-400">
                       View synced student directory (privacy enforced)

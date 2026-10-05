@@ -45,6 +45,7 @@ import { SyllabusSetupModal } from "../forms/SyllabusSetupModal.jsx";
 import { AuthModal } from "../forms/AuthModal.jsx";
 import { HelpFeedbackModal } from "../forms/HelpFeedbackModal.jsx";
 import { AdminPortalModal } from "../dashboard/AdminPortalModal.jsx";
+import { mergePublishedCatalog } from "../../lib/syllabus.js";
 import { NotificationCenter } from "../common/NotificationCenter.jsx";
 export default function App() {
   // Splash Screen State
@@ -84,6 +85,30 @@ export default function App() {
   const [goals, setGoals] = useState(loadGoals);
   const [routinePeriods, setRoutinePeriods] = useState(loadRoutinePeriods);
   const [routineFile, setRoutineFile] = useState(loadRoutineFile);
+  const [sharedContent, setSharedContent] = useState({ routine: null, notes: [] });
+  const [contentError, setContentError] = useState("");
+  useEffect(() => {
+    let active = true;
+    async function loadContent() {
+      try {
+        const response = await fetch("/api/content", { cache: "no-store" });
+        if (!response.ok) throw new Error("Published content is temporarily unavailable. Please try again.");
+        const content = await response.json();
+        if (!active) return;
+        setSharedContent(content);
+        setContentError("");
+        setSubjects((saved) => {
+          const merged = mergePublishedCatalog(saved, content.catalog);
+          if (merged !== saved) saveSubjects(merged);
+          return merged;
+        });
+      } catch (error) { if (active) setContentError(error.message); }
+    }
+    loadContent();
+    window.addEventListener("focus", loadContent);
+    const timer = setInterval(loadContent, 60_000);
+    return () => { active = false; clearInterval(timer); window.removeEventListener("focus", loadContent); };
+  }, []);
   // Syncing state
   const [isSyncing, setIsSyncing] = useState(false);
   // Modals visibility states
@@ -256,6 +281,8 @@ export default function App() {
 
         {currentTab === "study" && (
           <StudySection
+            publishedNotes={sharedContent.notes}
+            contentError={contentError}
             initialSubjectId={studySubjectId}
             subjects={subjects}
             onUpdateSubjects={handleUpdateSubjects}
@@ -265,6 +292,8 @@ export default function App() {
 
         {currentTab === "routine" && (
           <ClassRoutineView
+            publishedRoutine={sharedContent.routine}
+            contentError={contentError}
             routineFile={routineFile}
             onUpdateRoutineFile={handleUpdateRoutineFile}
             periods={routinePeriods}

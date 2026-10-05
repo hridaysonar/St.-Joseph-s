@@ -8,6 +8,8 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [category, setCategory] = useState("Website Problem");
+  const [error, setError] = useState("");
   useEffect(() => {
     if (isOpen) {
       fetch("/api/config")
@@ -26,6 +28,7 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
     e.preventDefault();
     if (!message.trim()) return;
     setIsSubmitting(true);
+    setError("");
     try {
       const res = await fetch("/api/feedback", {
         method: "POST",
@@ -35,15 +38,16 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
           studentEmail: profile.email,
           studentId: profile.studentId,
           type,
+          category,
           subject: currentSubject,
           message: message.trim(),
         }),
       });
       if (res.ok) {
         setSubmitted(true);
-      }
+      } else { const result = await res.json(); setError(result.error || "Submission failed. Please try again."); }
     } catch (err) {
-      console.error(err);
+      setError("Connection failed. Your message has been kept; please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -119,6 +123,7 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
+            {error && <p role="alert" className="rounded-xl bg-rose-50 p-3 text-sm text-rose-700">{error}</p>}
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5 uppercase">
                 Category
@@ -140,11 +145,13 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
                         : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400"
                     }`}
                   >
-                    {t}
+                    {t === "Problem Report" ? "Report a Problem" : t === "Feature Request" ? "Suggest a Feature" : t}
                   </button>
                 ))}
               </div>
             </div>
+
+            {type === "Problem Report" && <label className="block space-y-1 text-xs font-semibold text-slate-700 dark:text-slate-300">Problem category<select value={category} onChange={(event) => setCategory(event.target.value)} className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 dark:border-slate-700 dark:bg-slate-800">{["Website Problem", "Routine Problem", "PDF Problem", "Syllabus Problem", "Other"].map((item) => <option key={item}>{item}</option>)}</select></label>}
 
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 uppercase">
@@ -164,6 +171,7 @@ export const HelpFeedbackModal = ({ isOpen, onClose, profile }) => {
               </label>
               <textarea
                 rows={4}
+                maxLength={5000}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Describe your issue, suggestion, or question for the administrator..."

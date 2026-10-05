@@ -14,6 +14,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { chapterProgress, getSubjectPapers } from "../../lib/syllabus.js";
+import ChapterNotesModal from "./ChapterNotesModal.jsx";
 
 const statuses = {
   "Not Started": "শুরু করিনি",
@@ -51,6 +52,8 @@ export const StudySection = ({
   onUpdateSubjects,
   onOpenSyllabusSetup,
   initialSubjectId = null,
+  publishedNotes = [],
+  contentError = "",
 }) => {
   const [selectedId, setSelectedId] = useState(initialSubjectId);
   const [paperId, setPaperId] = useState(null);
@@ -58,7 +61,10 @@ export const StudySection = ({
   const [filter, setFilter] = useState("All");
   const [revisionOnly, setRevisionOnly] = useState(false);
   const [newChapter, setNewChapter] = useState("");
+  const [notesChapter, setNotesChapter] = useState(null);
   const heading = useRef(null);
+  const statusTapTimes = useRef(new Map());
+  const [now, setNow] = useState(() => Date.now());
   const subject = subjects.find((item) => item.id === selectedId);
   const papers = subject ? getSubjectPapers(subject) : [];
   const paper = papers.find((item) => item.id === paperId) || papers[0];
@@ -90,6 +96,15 @@ export const StudySection = ({
     heading.current?.focus({ preventScroll: true });
   }, [selectedId, revisionOnly]);
 
+  const hasPendingUndo = allChapters.some(
+    (chapter) => chapter.status === "Completed" && chapter.statusUndoUntil > now,
+  );
+  useEffect(() => {
+    if (!hasPendingUndo) return;
+    const timer = setInterval(() => setNow(Date.now()), 250);
+    return () => clearInterval(timer);
+  }, [hasPendingUndo]);
+
   function openSubject(id) {
     setSelectedId(id);
     setPaperId(null);
@@ -98,7 +113,27 @@ export const StudySection = ({
     setRevisionOnly(false);
     setNewChapter("");
   }
-  function updateChapter(subjectId, chapterId, status, logRevision = false) {
+  function updateChapter(subjectId, chapterId, status, logRevision = false, undo = false) {
+    const current = subjects.find((item) => item.id === subjectId)?.chapters.find(
+      (chapter) => chapter.id === chapterId,
+    );
+    if (!current) return;
+    const timestamp = Date.now();
+    if (undo) {
+      if (current.status !== "Completed" || !(current.statusUndoUntil > timestamp)) return;
+    } else if (!logRevision) {
+      if (current.status === status) return;
+      // Preserve revision actions; guard repeated changes to ordinary statuses.
+      if (current.status !== "Revision" && status !== "Revision") {
+        const key = JSON.stringify([subjectId, chapterId]);
+        if (timestamp - (statusTapTimes.current.get(key) || 0) < 750) return;
+        statusTapTimes.current.set(key, timestamp);
+      }
+    }
+    if (undo) {
+      statusTapTimes.current.set(JSON.stringify([subjectId, chapterId]), timestamp);
+    }
+    setNow(timestamp);
     onUpdateSubjects(
       subjects.map((item) =>
         item.id !== subjectId
@@ -110,9 +145,14 @@ export const StudySection = ({
                 const revise =
                   logRevision ||
                   (status === "Revision" && chapter.status !== "Revision");
+                const { statusUndoUntil, ...savedChapter } = chapter;
                 return {
-                  ...chapter,
+                  ...savedChapter,
                   status,
+                  // Save immediately so refresh preserves both progress and the deadline.
+                  ...(!undo && chapter.status === "Not Started" && status === "Completed"
+                    ? { statusUndoUntil: timestamp + 60_000 }
+                    : {}),
                   revisionCount:
                     (chapter.revisionCount || 0) + (revise ? 1 : 0),
                   ...(revise
@@ -151,6 +191,7 @@ export const StudySection = ({
 
   return (
     <div className="space-y-6 pb-20 text-slate-900 dark:text-white" lang="bn">
+      <ChapterNotesModal chapter={notesChapter} notes={publishedNotes} error={contentError} onClose={() => setNotesChapter(null)} />
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           {(subject || revisionOnly) && (
@@ -413,6 +454,7 @@ export const StudySection = ({
                     </div>
                   </div>
                   <div className="flex shrink-0 flex-wrap items-center gap-2">
+                    <button type="button" onClick={() => setNotesChapter(chapter)} aria-label={`${chapter.name} — Notes`} className="rounded-xl border border-slate-200 px-3 py-2.5 text-sm text-indigo-600 dark:border-slate-700 dark:text-indigo-400">Notes</button>
                     <select
                       aria-label={`${chapter.name} — স্ট্যাটাস`}
                       value={chapter.status}
@@ -431,6 +473,16 @@ export const StudySection = ({
                         </option>
                       ))}
                     </select>
+                    {chapter.status === "Completed" && chapter.statusUndoUntil > now && (
+                      <button
+                        type="button"
+                        aria-label={`${chapter.name} — পড়া হয়েছে বাতিল করুন`}
+                        onClick={() => updateChapter(chapter.subjectId, chapter.id, "Not Started", false, true)}
+                        className="rounded-xl bg-indigo-50 px-3 py-2.5 text-sm text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400"
+                      >
+                        Undo ({bn(Math.ceil((chapter.statusUndoUntil - now) / 1000))} সেকেন্ড)
+                      </button>
+                    )}
                     {chapter.status === "Revision" && (
                       <button
                         aria-label={`${chapter.name} — আজ রিভিশন করেছি`}

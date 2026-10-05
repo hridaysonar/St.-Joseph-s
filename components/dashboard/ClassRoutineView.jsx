@@ -21,11 +21,17 @@ export const ClassRoutineView = ({
   onUpdateRoutineFile,
   periods,
   onUpdatePeriods,
+  publishedRoutine = null,
+  contentError = "",
 }) => {
   const [activeTab, setActiveTab] = useState("official");
   const [selectedDay, setSelectedDay] = useState("Monday");
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAddingPeriod, setIsAddingPeriod] = useState(false);
+  useEffect(() => {
+    // Prefer the currently published college routine; saved views stay available.
+    if (publishedRoutine?.id) setActiveTab("published");
+  }, [publishedRoutine?.id]);
   // Time slots matching St. Joseph's College routine
   const TIME_SLOTS = [
     { id: 1, label: "09:00 - 09:45", name: "1st Period" },
@@ -118,6 +124,7 @@ export const ClassRoutineView = ({
 
         {/* View Switcher */}
         <div className="flex flex-wrap items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-2xl border border-slate-200/80 dark:border-slate-800 self-start sm:self-auto">
+          {publishedRoutine && <button onClick={() => setActiveTab("published")} className={`flex items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-semibold ${activeTab === "published" ? "bg-white text-indigo-600 shadow-xs dark:bg-slate-800 dark:text-indigo-400" : "text-slate-600 dark:text-slate-400"}`}><FileText size={14} />Published Routine</button>}
           <button
             onClick={() => setActiveTab("official")}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
@@ -127,7 +134,7 @@ export const ClassRoutineView = ({
             }`}
           >
             <Table className="w-3.5 h-3.5" />
-            <span>Full Routine Table</span>
+            <span>{publishedRoutine ? "Saved Routine Table" : "Full Routine Table"}</span>
           </button>
 
           <button
@@ -151,12 +158,19 @@ export const ClassRoutineView = ({
             }`}
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>PDF File</span>
+            <span>Personal PDF File</span>
           </button>
         </div>
       </div>
 
       {/* 1. Official Table View (Exact layout from the image) */}
+      {contentError && <p role="alert" className="rounded-xl bg-rose-50 p-3 text-sm text-rose-700">{contentError}</p>}
+      {publishedRoutine && (
+        <section className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-indigo-200 bg-white p-4 dark:border-indigo-900 dark:bg-slate-900">
+          <div><h3 className="font-bold">{publishedRoutine.title}</h3><p className="text-xs text-slate-500">Currently published college routine</p>{publishedRoutine.description && <p className="mt-1 text-sm">{publishedRoutine.description}</p>}</div>
+          <a href={publishedRoutine.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white"><FileText size={16} />Open Routine PDF</a>
+        </section>
+      )}
       {activeTab === "official" && (
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -181,7 +195,7 @@ export const ClassRoutineView = ({
 
               <label className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-xs">
                 <Upload className="w-3.5 h-3.5" />
-                <span>Upload PDF</span>
+                <span>Upload Personal PDF</span>
                 <input
                   type="file"
                   accept="application/pdf,image/*"
@@ -582,11 +596,11 @@ export const ClassRoutineView = ({
               </div>
 
               <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                Upload Scanned Institutional Routine
+                Keep a Personal Routine Copy
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-1 mb-6">
-                You can upload the exact PDF or photo from St. Joseph&apos;s
-                School and College to keep as an original document.
+                Upload a PDF or photo for your own device. The published college
+                routine is managed by the Admin.
               </p>
 
               <label className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-600/20 active:scale-[0.99] transition-all">

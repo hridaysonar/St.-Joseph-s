@@ -13,26 +13,10 @@ const nextConfig = {
         source: "/api/students/sync",
         destination: "/api/users?endpoint=/api/students/sync",
       },
-      {
-        source: "/api/admin/students",
-        destination: "/api/users?endpoint=/api/admin/students",
-      },
       { source: "/api/config", destination: "/api/users?endpoint=/api/config" },
-      {
-        source: "/api/admin/config",
-        destination: "/api/users?endpoint=/api/admin/config",
-      },
       {
         source: "/api/feedback",
         destination: "/api/users?endpoint=/api/feedback",
-      },
-      {
-        source: "/api/admin/feedbacks",
-        destination: "/api/users?endpoint=/api/admin/feedbacks",
-      },
-      {
-        source: "/api/admin/login",
-        destination: "/api/users?endpoint=/api/admin/login",
       },
     ];
   },

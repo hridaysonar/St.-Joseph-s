@@ -4,7 +4,8 @@ import {
   readLocalStore,
   writeLocalStore,
 } from "../lib/db.js";
-import { ADMIN_SECRET } from "../lib/auth.js";
+import { requireAdminSession } from "../lib/admin-security.js";
+import { submitFeedback } from "../lib/feedback.js";
 import { USER_COLLECTION } from "../models/User.js";
 const geminiClient = process.env.GEMINI_API_KEY
   ? new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
@@ -16,7 +17,7 @@ export async function getApiUsers(req) {
     if (mongoDb) {
       const users = await mongoDb
         .collection(USER_COLLECTION)
-        .find({})
+        .find({}, { projection: { password: 0, passwordHash: 0 } })
         .toArray();
       return Response.json({ success: true, count: users.length, users });
     }
@@ -24,7 +25,7 @@ export async function getApiUsers(req) {
     return Response.json({
       success: true,
       count: store.students.length,
-      users: store.students,
+      users: store.students.map(({ password, passwordHash, ...student }) => student),
     });
   } catch (e) {
     return Response.json({ error: e.message }, { status: 500 });
@@ -393,13 +394,7 @@ export async function postApiStudentsSync(req) {
 export async function getApiAdminStudents(req) {
   const { db: mongoDb } = await connectToDatabase();
   try {
-    const adminToken = req.headers["x-admin-token"] || req.query.adminSecret;
-    if (adminToken !== ADMIN_SECRET) {
-      return Response.json(
-        { error: "Unauthorized: Invalid Admin credentials." },
-        { status: 401 },
-      );
-    }
+    await requireAdminSession(req.headers);
     let students = [];
     if (mongoDb) {
       students = await mongoDb
@@ -485,13 +480,7 @@ export async function getApiConfig(req) {
 export async function postApiAdminConfig(req) {
   const { db: mongoDb } = await connectToDatabase();
   try {
-    const adminToken = req.headers["x-admin-token"] || req.query.adminSecret;
-    if (adminToken !== ADMIN_SECRET) {
-      return Response.json(
-        { error: "Unauthorized: Invalid Admin credentials." },
-        { status: 401 },
-      );
-    }
+    await requireAdminSession(req.headers);
     const { adminContactEmail } = req.body;
     if (!adminContactEmail) {
       return Response.json(
@@ -522,55 +511,13 @@ export async function postApiAdminConfig(req) {
 }
 
 export async function postApiFeedback(req) {
-  const { db: mongoDb } = await connectToDatabase();
-  try {
-    const { studentName, studentEmail, studentId, type, subject, message } =
-      req.body;
-    if (!message || !type) {
-      return Response.json(
-        { error: "Feedback type and message are required." },
-        { status: 400 },
-      );
-    }
-    const feedbackEntry = {
-      id: "fb_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7),
-      studentName: studentName || "Anonymous Student",
-      studentEmail: studentEmail || "",
-      studentId: studentId || "",
-      type, // 'Problem Report' | 'Feature Request' | 'Feedback' | 'General Help'
-      subject: subject || `Student Life — ${type}`,
-      message,
-      createdAt: new Date().toISOString(),
-      status: "pending",
-    };
-    if (mongoDb) {
-      await mongoDb.collection("feedbacks").insertOne(feedbackEntry);
-    } else {
-      const store = readLocalStore();
-      if (!Array.isArray(store.feedbacks)) store.feedbacks = [];
-      store.feedbacks.unshift(feedbackEntry);
-      writeLocalStore(store);
-    }
-    return Response.json({ success: true, id: feedbackEntry.id });
-  } catch (err) {
-    console.error("Error saving feedback:", err);
-    return Response.json(
-      { error: "Failed to submit feedback." },
-      { status: 500 },
-    );
-  }
+  return submitFeedback(req);
 }
 
 export async function getApiAdminFeedbacks(req) {
   const { db: mongoDb } = await connectToDatabase();
   try {
-    const adminToken = req.headers["x-admin-token"] || req.query.adminSecret;
-    if (adminToken !== ADMIN_SECRET) {
-      return Response.json(
-        { error: "Unauthorized: Invalid Admin credentials." },
-        { status: 401 },
-      );
-    }
+    await requireAdminSession(req.headers);
     let feedbacks = [];
     if (mongoDb) {
       feedbacks = await mongoDb
@@ -591,13 +538,6 @@ export async function getApiAdminFeedbacks(req) {
   }
 }
 
-export async function postApiAdminLogin(req) {
-  const { secret } = req.body;
-  if (secret === ADMIN_SECRET) {
-    return Response.json({ success: true, token: ADMIN_SECRET });
-  }
-  return Response.json(
-    { success: false, error: "Incorrect Admin password." },
-    { status: 401 },
-  );
+export async function postApiAdminLogin() {
+  return Response.json({ error: "Use verified Google Admin sign-in at /admin." }, { status: 410 });
 }
