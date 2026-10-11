@@ -90,7 +90,7 @@ export const HomeDashboard = ({
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
-              {profile.studentName}!
+              {profile.studentName === "Nahid Hasan" ? "RiFat BhuiYan" : profile.studentName}!
             </h1>
 
             <p className="text-xs sm:text-sm text-indigo-200/80 max-w-lg leading-relaxed">
