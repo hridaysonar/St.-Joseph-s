@@ -106,6 +106,8 @@ export default function NamazView({ dailyNamaz, onUpdateNamaz }) {
                   <span
                     className={`p-1.5 rounded-xl ${isCompleted ? "bg-white/20" : "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300"}`}
                   >
+
+                    {/* hi  */}
                     {icon}
                   </span>
                   {isCompleted ? (
